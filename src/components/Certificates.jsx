@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
+const asset = (path) => `${import.meta.env.BASE_URL || '/'}${path.replace(/^\//, '')}`
+
 const certData = [
   {
     id: 'detik',
-    file: '/sertifikat/Detik.com.webp',
+    file: asset('sertifikat/Detik.com.webp'),
     title: 'Detik.com',
     source: 'Detik.com',
     sourceType: 'Media Nasional',
@@ -14,7 +16,7 @@ const certData = [
   },
   {
     id: 'csirt-cimahi',
-    file: '/sertifikat/CSIRT Cimahi.webp',
+    file: asset('sertifikat/CSIRT Cimahi.webp'),
     title: 'CSIRT Cimahi',
     source: 'CSIRT Kota Cimahi',
     sourceType: 'Government CSIRT',
@@ -24,7 +26,7 @@ const certData = [
   },
   {
     id: 'csirt-jakarta',
-    file: '/sertifikat/CSIRT Jakarta.webp',
+    file: asset('sertifikat/CSIRT Jakarta.webp'),
     title: 'CSIRT Jakarta',
     source: 'CSIRT DKI Jakarta',
     sourceType: 'Government CSIRT',
@@ -34,7 +36,7 @@ const certData = [
   },
   {
     id: 'csirt-jogja',
-    file: '/sertifikat/CSIRT Jogja.webp',
+    file: asset('sertifikat/CSIRT Jogja.webp'),
     title: 'CSIRT Yogyakarta',
     source: 'CSIRT D.I. Yogyakarta',
     sourceType: 'Government CSIRT',
@@ -44,7 +46,7 @@ const certData = [
   },
   {
     id: 'csirt-kaltara',
-    file: '/sertifikat/CSIRT Kaltara.webp',
+    file: asset('sertifikat/CSIRT Kaltara.webp'),
     title: 'CSIRT Kaltara',
     source: 'CSIRT Kalimantan Utara',
     sourceType: 'Government CSIRT',

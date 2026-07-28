@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import logo from '../assets/logo.png'
-import redLogo from '../assets/404notvanlogo.png'
+
+// Public paths + BASE_URL so logos work on domain / subdirectory deploys
+const base = import.meta.env.BASE_URL || '/'
+const logo = `${base}logo.png`
+const redLogo = `${base}404notvanlogo.png`
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -138,11 +141,19 @@ export default function Navbar() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
                 className="nav-logo-img"
+                onError={(e) => {
+                  // fallback if one path fails
+                  const el = e.currentTarget
+                  if (el.dataset.fallback === '1') return
+                  el.dataset.fallback = '1'
+                  el.src = isRed ? `${base}logo.png` : `${base}404notvanlogo.png`
+                }}
                 style={{
                   height: scrolled ? '40px' : '46px',
                   width: 'auto',
                   maxWidth: '170px',
                   objectFit: 'contain',
+                  display: 'block',
                   filter: isRed
                     ? 'brightness(1.1) drop-shadow(0 0 12px rgba(255, 40, 70, 0.6))'
                     : 'brightness(1.1) drop-shadow(0 0 12px rgba(59, 130, 246, 0.55))',

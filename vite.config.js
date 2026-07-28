@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
+  // Relative base so assets work on custom domain AND GitHub Pages project path (/my/)
+  base: './',
   plugins: [
     react(),
     tailwindcss(),

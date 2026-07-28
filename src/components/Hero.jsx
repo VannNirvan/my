@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import heroImg from '../assets/IMG_20260315_032010_835.webp'
-import blueLogo from '../assets/logo.png'
 import redPhoto from '../assets/404notvan.webp'
-import redLogoImg from '../assets/404notvanlogo.png'
+
+const base = import.meta.env.BASE_URL || '/'
+const blueLogo = `${base}logo.png`
+const redLogoImg = `${base}404notvanlogo.png`
 
 export default function Hero() {
   const [showScroll, setShowScroll] = useState(true)
