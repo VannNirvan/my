@@ -173,24 +173,42 @@ export default function Roadmap() {
           </div>
         </div>
 
-        {/* ── Mobile Vertical Layout ── */}
-        <div className="mobile-only" style={{ flexDirection: 'column', gap: '2rem', position: 'relative', maxWidth: '480px', margin: '0 auto', paddingLeft: '1rem' }}>
-          <div style={{ position: 'absolute', left: '23px', top: '20px', bottom: '20px', width: '3px', background: 'linear-gradient(to bottom, var(--color-accent), rgba(59,130,246,0.15))', borderRadius: '3px' }} />
+        {/* ── Mobile Vertical Pipe Roadmap ── */}
+        <div className="mobile-only roadmap-mobile" style={{ flexDirection: 'column', gap: '1.5rem', position: 'relative', maxWidth: '460px', margin: '0 auto', padding: '0.5rem 0 0.5rem 2.75rem' }}>
+          {/* Vertical pipe (matches desktop aesthetic) */}
+          <div className="roadmap-mobile-pipe" style={{
+            position: 'absolute',
+            left: '14px',
+            top: '1.5rem',
+            bottom: '1.5rem',
+            width: '4px',
+            borderRadius: '4px',
+            background: 'linear-gradient(to bottom, var(--color-accent) 0%, var(--color-accent) 70%, rgba(59,130,246,0.15) 100%)',
+            boxShadow: '0 0 12px rgba(59,130,246,0.25)',
+            zIndex: 1,
+          }} />
 
           {timelineData.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 16 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              style={{ position: 'relative', paddingLeft: '2.5rem' }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              style={{ position: 'relative', zIndex: 2 }}
             >
+              {/* Node dot on the pipe */}
               <div style={{
-                position: 'absolute', left: '7px', top: '18px', width: '15px', height: '15px', borderRadius: '50%',
-                background: 'var(--color-bg)', border: `2px solid ${item.active ? 'var(--color-accent)' : 'rgba(59,130,246,0.4)'}`,
-                boxShadow: item.active ? '0 0 10px rgba(59,130,246,0.8)' : 'none',
-                zIndex: 2,
+                position: 'absolute',
+                left: '-2.15rem',
+                top: '1.4rem',
+                width: '18px',
+                height: '18px',
+                borderRadius: '50%',
+                background: 'var(--color-bg)',
+                border: `3px solid ${item.active ? 'var(--color-accent)' : 'rgba(59,130,246,0.35)'}`,
+                boxShadow: item.active ? '0 0 12px rgba(59,130,246,0.7)' : 'none',
+                zIndex: 3,
               }} />
               <RoadmapCardContent item={item} />
             </motion.div>

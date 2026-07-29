@@ -9,7 +9,6 @@ const redLogoImg = `${base}404notvanlogo.png`
 
 export default function Hero() {
   const [showScroll, setShowScroll] = useState(true)
-  const [showContent, setShowContent] = useState(true)
   const [isFlipped, setIsFlipped] = useState(false)
   const heroRef = useRef(null)
 
@@ -49,9 +48,8 @@ export default function Hero() {
   useEffect(() => {
     const handleScroll = () => {
       setShowScroll(window.scrollY <= 150)
-      setShowContent(window.scrollY < window.innerHeight * 0.9)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -94,9 +92,6 @@ export default function Hero() {
           flexDirection: 'row',
           alignItems: 'center',
           gap: '4rem',
-          opacity: showContent ? 1 : 0,
-          visibility: showContent ? 'visible' : 'hidden',
-          transition: 'opacity 0.6s ease',
           paddingTop: '8.5rem',
           paddingBottom: '3.5rem',
           flexWrap: 'wrap',

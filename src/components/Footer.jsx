@@ -38,21 +38,11 @@ export default function Footer() {
               style={{
                 display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
                 gap: '0.75rem', padding: '1.5rem 1.625rem',
-                background: 'rgba(15,18,33,0.7)', border: '1px solid var(--color-border)',
+                background: 'rgba(15,18,33,0.85)', border: '1px solid var(--color-border)',
                 borderRadius: '10px', textDecoration: 'none', color: 'var(--color-text-secondary)',
-                transition: 'all 0.35s ease',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'rgba(59,130,246,0.35)'
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.background = 'rgba(20,24,40,0.9)'
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(59,130,246,0.06)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--color-border)'
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.background = 'rgba(15,18,33,0.7)'
-                e.currentTarget.style.boxShadow = 'none'
+                transition: 'border-color 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
+                opacity: 1,
+                visibility: 'visible',
               }}
             >
               <div style={{ color: 'var(--color-accent)' }}>{s.icon}</div>

@@ -34,6 +34,28 @@
   --font-mono:    'JetBrains Mono', monospace;
 }
 
+/* Register accent colors as animatable so blue↔red flips transition smoothly */
+@property --color-accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #3b82f6;
+}
+@property --color-accent-dim {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #2563eb;
+}
+@property --color-accent-bright {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #60a5fa;
+}
+
+/* Smooth theme transition on all elements using accent vars */
+html {
+  transition: --color-accent 0.7s ease, --color-accent-dim 0.7s ease, --color-accent-bright 0.7s ease, background-color 0.7s ease;
+}
+
 /* ============================================
    BASE
    ============================================ */
@@ -572,6 +594,20 @@ img {
 /* ============================================
    SOCIAL LINK
    ============================================ */
+
+.footer-social-block {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.footer-social-block:hover,
+.footer-social-block:focus-visible,
+.footer-social-block:active {
+  border-color: rgba(59,130,246,0.35) !important;
+  transform: translateY(-4px);
+  background: rgba(20,24,40,0.92) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(59,130,246,0.06);
+  outline: none;
+}
 
 .social-link {
   display: inline-flex;
