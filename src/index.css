@@ -280,7 +280,6 @@ html[data-mode="red"] .ambient-bg__glow--c {
 img {
   max-width: 100%;
   height: auto;
-  content-visibility: auto;
 }
 
 /* ============================================
@@ -598,6 +597,7 @@ img {
 .footer-social-block {
   opacity: 1 !important;
   visibility: visible !important;
+  display: flex !important;
 }
 .footer-social-block:hover,
 .footer-social-block:focus-visible,
@@ -607,6 +607,7 @@ img {
   background: rgba(20,24,40,0.92) !important;
   box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(59,130,246,0.06);
   outline: none;
+  opacity: 1 !important;
 }
 
 .social-link {
