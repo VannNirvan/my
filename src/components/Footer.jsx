@@ -25,7 +25,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer style={{ borderTop: '1px solid var(--color-border)', paddingTop: '4rem', paddingBottom: '3rem' }}>
+    <footer style={{ borderTop: '1px solid var(--color-border)', paddingTop: '4rem', paddingBottom: '3rem', position: 'relative', zIndex: 1 }}>
       <div className="site-container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem', marginBottom: '3rem' }}>
           {socials.map((s) => (
@@ -36,13 +36,19 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="footer-social-block"
               style={{
-                display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-                gap: '0.75rem', padding: '1.5rem 1.625rem',
-                background: 'rgba(15,18,33,0.85)', border: '1px solid var(--color-border)',
-                borderRadius: '10px', textDecoration: 'none', color: 'var(--color-text-secondary)',
-                transition: 'border-color 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                gap: '0.75rem',
+                padding: '1.5rem 1.625rem',
+                background: 'rgba(15,18,33,0.9)',
+                border: '1px solid rgba(59,130,246,0.2)',
+                borderRadius: '10px',
+                textDecoration: 'none',
+                color: 'var(--color-text-secondary)',
                 opacity: 1,
                 visibility: 'visible',
+                boxSizing: 'border-box',
               }}
             >
               <div style={{ color: 'var(--color-accent)' }}>{s.icon}</div>

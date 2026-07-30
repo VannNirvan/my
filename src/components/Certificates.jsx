@@ -56,9 +56,88 @@ const certData = [
   },
 ]
 
+function CertCard({ cert, onClick }) {
+  return (
+    <div
+      className="reveal-element cert-real-card"
+      onClick={onClick}
+      style={{
+        borderRadius: '12px',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        position: 'relative',
+        border: '1px solid var(--color-border)',
+        background: 'rgba(15,18,33,0.9)',
+      }}
+    >
+      <div style={{
+        position: 'absolute', inset: 0,
+        borderRadius: '12px',
+        background: cert.color,
+        opacity: 0.03,
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{ position: 'relative', paddingTop: '75%', overflow: 'hidden' }}>
+        <img
+          src={cert.file}
+          alt={cert.title}
+          loading="lazy"
+          decoding="async"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          className="cert-thumb"
+        />
+        <div className="cert-overlay" style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(6,8,16,0.95) 0%, rgba(6,8,16,0.3) 60%, transparent 100%)',
+          opacity: 0,
+          transition: 'opacity 0.35s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{
+              width: '44px', height: '44px', borderRadius: '50%',
+              background: 'rgba(59,130,246,0.2)', border: '1.5px solid var(--color-accent)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 0 16px rgba(59,130,246,0.4)',
+            }}>
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <span style={{ color: 'white', fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.12em' }}>Buka Sertifikat</span>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ padding: '0.85rem 1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: cert.color, boxShadow: `0 0 8px ${cert.color}` }} />
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--color-text-primary)' }}>{cert.title}</span>
+          </div>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', color: 'var(--color-text-muted)' }}>{cert.year}</span>
+        </div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.64rem', color: cert.color, letterSpacing: '0.04em' }}>
+          {cert.source}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Certificates() {
   const [lightbox, setLightbox] = useState(null)
-
   useEffect(() => {
     if (lightbox) {
       document.documentElement.setAttribute('data-lightbox-open', 'true')
@@ -100,93 +179,28 @@ export default function Certificates() {
           </p>
         </div>
 
-        {/* Cert grid — 3 per row */}
-        <div style={{
+        {/* Cert grid — 3 per row desktop, swipe carousel mobile */}
+        <div className="cert-grid-desktop" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '2rem',
         }}>
           {certData.map((cert) => (
-            <div
-              key={cert.id}
-              className="reveal-element cert-real-card"
-              onClick={() => setLightbox(cert)}
-              style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                position: 'relative',
-                border: '1px solid var(--color-border)',
-                background: 'rgba(15,18,33,0.85)',
-                backdropFilter: 'blur(15px)',
-              }}
-            >
-              {/* Stacked card effect behind */}
-              <div style={{
-                position: 'absolute', inset: 0,
-                borderRadius: '12px',
-                background: cert.color,
-                opacity: 0.03,
-                pointerEvents: 'none',
-              }} />
+            <CertCard key={cert.id} cert={cert} onClick={() => setLightbox(cert)} />
+          ))}
+        </div>
 
-              {/* Thumbnail wrap */}
-              <div style={{ position: 'relative', paddingTop: '75%', overflow: 'hidden' }}>
-                <img
-                  src={cert.file}
-                  alt={cert.title}
-                  loading="lazy"
-                  decoding="async"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                  className="cert-thumb"
-                />
-                {/* Hover Overlay */}
-                <div className="cert-overlay" style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(to top, rgba(6,8,16,0.95) 0%, rgba(6,8,16,0.3) 60%, transparent 100%)',
-                  opacity: 0,
-                  transition: 'opacity 0.35s ease',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{
-                      width: '44px', height: '44px', borderRadius: '50%',
-                      background: 'rgba(59,130,246,0.2)', border: '1.5px solid var(--color-accent)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      boxShadow: '0 0 16px rgba(59,130,246,0.4)',
-                    }}>
-                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    </div>
-                    <span style={{ color: 'white', fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.12em' }}>Buka Sertifikat</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Footer Info */}
-              <div style={{ padding: '1rem 1.15rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: cert.color, boxShadow: `0 0 8px ${cert.color}` }} />
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>{cert.title}</span>
-                  </div>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--color-text-muted)' }}>{cert.year}</span>
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: cert.color, letterSpacing: '0.04em' }}>
-                  {cert.source}
-                </div>
-              </div>
+        {/* Mobile horizontal swipe carousel */}
+        <div className="cert-carousel-hint">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l-4 5 4 5M16 7l4 5-4 5" />
+          </svg>
+          Geser untuk lihat semua sertifikat
+        </div>
+        <div className="cert-carousel-mobile">
+          {certData.map((cert) => (
+            <div key={cert.id} className="cert-carousel-item">
+              <CertCard cert={cert} onClick={() => setLightbox(cert)} />
             </div>
           ))}
         </div>

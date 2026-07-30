@@ -17,7 +17,7 @@ export default function Hero() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let timer = null
     const start = () => {
-      timer = setInterval(() => setIsFlipped((p) => !p), 10000)
+      timer = setInterval(() => setIsFlipped((p) => !p), 7000)
     }
     const stop = () => {
       if (timer) clearInterval(timer)

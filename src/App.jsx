@@ -2,6 +2,7 @@ import { useEffect, lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AmbientBackground from './components/AmbientBackground'
+import Footer from './components/Footer'
 
 const Welcome = lazy(() => import('./components/Welcome'))
 const Roadmap = lazy(() => import('./components/Roadmap'))
@@ -12,7 +13,6 @@ const HallOfFame = lazy(() => import('./components/HallOfFame'))
 const Certificates = lazy(() => import('./components/Certificates'))
 const ImpactStrip = lazy(() => import('./components/ImpactStrip'))
 const ContactMe = lazy(() => import('./components/ContactMe'))
-const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
   useEffect(() => {
@@ -69,9 +69,7 @@ function App() {
         </Suspense>
       </main>
 
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+      <Footer />
     </>
   )
 }

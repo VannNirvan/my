@@ -11,8 +11,6 @@ const hofEntries = [
     year: '2026',
     programImg: `${import.meta.env.BASE_URL || '/'}hof/nasa/nasa.webp`,
     hofImg: `${import.meta.env.BASE_URL || '/'}hof/nasa/hof.webp`,
-    color: '#3b82f6',
-    glowColor: 'rgba(59,130,246,0.35)',
     desc: 'Listed on NASA\'s official Vulnerability Disclosure Program Hall of Fame via Bugcrowd for identifying and responsibly reporting a security vulnerability.',
   },
 ]
@@ -27,7 +25,7 @@ export default function HallOfFame() {
       <div style={{
         position: 'absolute', top: '20%', left: '30%',
         width: '500px', height: '500px', borderRadius: '50%',
-        background: 'rgba(59,130,246,0.04)', filter: 'blur(120px)',
+        background: 'var(--color-accent-glow)', filter: 'blur(120px)',
         pointerEvents: 'none',
       }} />
       <div style={{
@@ -63,12 +61,11 @@ export default function HallOfFame() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 0.8, delay: idx * 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              background: 'rgba(15,18,33,0.75)',
-              backdropFilter: 'blur(20px)',
-              border: `1px solid rgba(59,130,246,0.12)`,
+              background: 'rgba(15,18,33,0.85)',
+              border: `1px solid var(--color-border)`,
               borderRadius: '16px',
               overflow: 'hidden',
-              boxShadow: `0 20px 60px rgba(0,0,0,0.4), 0 0 40px ${entry.glowColor}`,
+              boxShadow: `0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--color-accent-glow)`,
               maxWidth: '900px',
               margin: '0 auto',
             }}
@@ -77,7 +74,7 @@ export default function HallOfFame() {
             <div style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               padding: '1rem 1.5rem',
-              borderBottom: '1px solid rgba(59,130,246,0.08)',
+              borderBottom: '1px solid var(--color-border)',
               background: 'rgba(11,14,26,0.6)',
             }}>
               <div>
@@ -90,7 +87,7 @@ export default function HallOfFame() {
                 </div>
                 <div style={{
                   fontFamily: 'var(--font-mono)', fontSize: '0.62rem',
-                  color: entry.color, letterSpacing: '0.08em', marginTop: '0.2rem',
+                  color: 'var(--color-accent)', letterSpacing: '0.08em', marginTop: '0.2rem',
                 }}>
                   {entry.platform} · {entry.year}
                 </div>
@@ -130,7 +127,7 @@ export default function HallOfFame() {
               <div style={{
                 marginBottom: '1.5rem',
                 borderRadius: '10px',
-                border: '1px solid rgba(59,130,246,0.1)',
+                border: '1px solid var(--color-border)',
                 overflow: 'hidden',
                 background: '#0a0c16',
                 position: 'relative',
@@ -138,7 +135,7 @@ export default function HallOfFame() {
                 <div style={{
                   padding: '0.5rem 1rem',
                   background: 'rgba(11,14,26,0.8)',
-                  borderBottom: '1px solid rgba(59,130,246,0.06)',
+                  borderBottom: '1px solid var(--color-border)',
                   display: 'flex', alignItems: 'center', gap: '0.5rem',
                 }}>
                   <div style={{ display: 'flex', gap: '4px' }}>
@@ -167,7 +164,7 @@ export default function HallOfFame() {
               {/* Hall of Fame Researchers List */}
               <div style={{
                 borderRadius: '10px',
-                border: '1px solid rgba(59,130,246,0.1)',
+                border: '1px solid var(--color-border)',
                 overflow: 'hidden',
                 background: '#0a0c16',
                 position: 'relative',
@@ -175,7 +172,7 @@ export default function HallOfFame() {
                 <div style={{
                   padding: '0.5rem 1rem',
                   background: 'rgba(11,14,26,0.8)',
-                  borderBottom: '1px solid rgba(59,130,246,0.06)',
+                  borderBottom: '1px solid var(--color-border)',
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -193,9 +190,9 @@ export default function HallOfFame() {
                   </div>
                   <span style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.55rem',
-                    color: entry.color, letterSpacing: '0.1em',
+                    color: 'var(--color-accent)', letterSpacing: '0.1em',
                     padding: '2px 8px', borderRadius: '3px',
-                    background: `${entry.color}12`, border: `1px solid ${entry.color}25`,
+                    background: 'var(--color-accent-subtle)', border: '1px solid var(--color-border-hover)',
                   }}>
                     LISTED
                   </span>
@@ -215,7 +212,7 @@ export default function HallOfFame() {
                     position: 'absolute',
                     bottom: 0, left: 0, right: 0,
                     height: '50%',
-                    background: 'linear-gradient(to top, rgba(59,130,246,0.06) 0%, transparent 100%)',
+                    background: 'linear-gradient(to top, var(--color-accent-glow) 0%, transparent 100%)',
                     pointerEvents: 'none',
                   }} />
                 </div>
@@ -231,8 +228,8 @@ export default function HallOfFame() {
                   marginTop: '1.25rem',
                   padding: '0.85rem 1.15rem',
                   borderRadius: '10px',
-                  background: 'rgba(59,130,246,0.05)',
-                  border: '1px solid rgba(59,130,246,0.12)',
+                  background: 'var(--color-accent-subtle)',
+                  border: '1px solid var(--color-border)',
                 }}
               >
                 <div style={{ flex: 1, minWidth: 0 }}>
@@ -252,9 +249,9 @@ export default function HallOfFame() {
                 </div>
                 <div style={{
                   padding: '0.3rem 0.7rem', borderRadius: '4px',
-                  background: `${entry.color}15`, border: `1px solid ${entry.color}25`,
+                  background: 'var(--color-accent-subtle)', border: '1px solid var(--color-border-hover)',
                   fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-                  color: entry.color, letterSpacing: '0.08em', flexShrink: 0,
+                  color: 'var(--color-accent)', letterSpacing: '0.08em', flexShrink: 0,
                 }}>
                   HOF #{idx + 1}
                 </div>

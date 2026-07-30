@@ -252,11 +252,54 @@ html[data-mode="red"] .ambient-bg__glow--c {
 
 @media (max-width: 768px) {
   .ambient-bg__glow {
-    filter: blur(70px);
-    opacity: 0.75;
+    filter: blur(60px);
+    opacity: 0.6;
   }
+  .ambient-bg__glow--b,
   .ambient-bg__glow--c { display: none; }
-  .ambient-bg__grid { opacity: 0.14; background-size: 56px 56px; }
+  .ambient-bg__grid { display: none; }
+}
+
+/* ============================================
+   MOBILE PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Disable backdrop-filter (heavy on Android) */
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Reduce box-shadows */
+  .nav-bar,
+  .finding-card,
+  .glass-card,
+  .cert-lightbox,
+  .lightbox-modal,
+  .footer-social-block,
+  .roadmap-card {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+  }
+
+  /* Disable ambient glow animations (saves CPU/GPU) */
+  .ambient-bg__glow {
+    animation: none !important;
+  }
+
+  /* Reduce section padding for faster scroll */
+  .section-spacing {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Disable heavy transitions on mobile */
+  .glass-card,
+  .finding-card,
+  .footer-social-block,
+  .nav-bar {
+    transition: border-color 0.2s ease, transform 0.2s ease !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -598,16 +641,18 @@ img {
   opacity: 1 !important;
   visibility: visible !important;
   display: flex !important;
+  border: 1px solid rgba(59,130,246,0.2) !important;
+  background: rgba(15,18,33,0.9) !important;
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 .footer-social-block:hover,
-.footer-social-block:focus-visible,
-.footer-social-block:active {
-  border-color: rgba(59,130,246,0.35) !important;
+.footer-social-block:focus-visible {
+  border-color: rgba(59,130,246,0.45) !important;
   transform: translateY(-4px);
-  background: rgba(20,24,40,0.92) !important;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(59,130,246,0.06);
-  outline: none;
+  background: rgba(20,24,40,0.95) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.08);
   opacity: 1 !important;
+  outline: none;
 }
 
 .social-link {
@@ -1035,5 +1080,47 @@ img {
 @media (max-width: 520px) {
   .findings-grid {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================
+   CERTIFICATES — mobile swipe carousel
+   ============================================ */
+
+.cert-carousel-mobile { display: none; }
+.cert-carousel-hint { display: none; }
+
+@media (max-width: 768px) {
+  .cert-grid-desktop { display: none !important; }
+
+  .cert-carousel-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.85rem;
+    opacity: 0.7;
+  }
+
+  .cert-carousel-mobile {
+    display: flex;
+    gap: 0.9rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.5rem 1rem 1rem;
+    margin: 0 -1rem;
+  }
+  .cert-carousel-mobile::-webkit-scrollbar { display: none; }
+
+  .cert-carousel-item {
+    flex: 0 0 78%;
+    max-width: 280px;
+    scroll-snap-align: center;
   }
 }

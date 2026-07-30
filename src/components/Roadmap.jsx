@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 const timelineData = [
   {
@@ -27,7 +27,15 @@ const timelineData = [
 
 export default function Roadmap() {
   const sectionRef = useRef(null)
+  const mobilePipeRef = useRef(null)
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 })
+
+  // Scroll-linked pipe fill for mobile — completes when last card fully passed
+  const { scrollYProgress } = useScroll({
+    target: mobilePipeRef,
+    offset: ['start 85%', 'end 60%'],
+  })
+  const pipeScaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   // Container width = 880px.
   // Card 0 (SD): top=0, left=90px, width=280px. Center X = 230. Bottom Y = 160.
@@ -173,43 +181,69 @@ export default function Roadmap() {
           </div>
         </div>
 
-        {/* ── Mobile Vertical Pipe Roadmap ── */}
-        <div className="mobile-only roadmap-mobile" style={{ flexDirection: 'column', gap: '1.5rem', position: 'relative', maxWidth: '460px', margin: '0 auto', padding: '0.5rem 0 0.5rem 2.75rem' }}>
-          {/* Vertical pipe (matches desktop aesthetic) */}
-          <div className="roadmap-mobile-pipe" style={{
+        {/* ── Mobile Vertical Centered Pipe (scroll-linked fill) ── */}
+        <div ref={mobilePipeRef} className="mobile-only roadmap-mobile" style={{ flexDirection: 'column', alignItems: 'center', gap: '2.5rem', position: 'relative', maxWidth: '380px', margin: '0 auto' }}>
+          {/* Thick pipe container — centered, scroll-linked */}
+          <div style={{
             position: 'absolute',
-            left: '14px',
+            left: '50%',
             top: '1.5rem',
             bottom: '1.5rem',
-            width: '4px',
-            borderRadius: '4px',
-            background: 'linear-gradient(to bottom, var(--color-accent) 0%, var(--color-accent) 70%, rgba(59,130,246,0.15) 100%)',
-            boxShadow: '0 0 12px rgba(59,130,246,0.25)',
+            width: '14px',
+            marginLeft: '-7px',
             zIndex: 1,
-          }} />
+            transformOrigin: 'top center',
+          }}>
+            {/* Layer 1: dim track (12px) — always visible */}
+            <div style={{
+              position: 'absolute',
+              left: '1px',
+              top: 0,
+              bottom: 0,
+              width: '12px',
+              borderRadius: '6px',
+              background: 'rgba(59,130,246,0.13)',
+            }} />
+            {/* Layer 2+3: glow + highlight — fills with scroll */}
+            <motion.div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                transformOrigin: 'top center',
+                scaleY: pipeScaleY,
+              }}
+            >
+              <div style={{
+                position: 'absolute',
+                left: '3.5px',
+                top: 0,
+                bottom: 0,
+                width: '7px',
+                borderRadius: '4px',
+                background: 'linear-gradient(to bottom, var(--color-accent) 0%, var(--color-accent) 70%, rgba(59,130,246,0.2) 100%)',
+                boxShadow: '0 0 10px rgba(59,130,246,0.6), 0 0 20px rgba(59,130,246,0.3)',
+              }} />
+              <div style={{
+                position: 'absolute',
+                left: '6px',
+                top: 0,
+                bottom: 0,
+                width: '2px',
+                borderRadius: '1px',
+                background: 'rgba(255,255,255,0.45)',
+              }} />
+            </motion.div>
+          </div>
 
           {timelineData.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, x: 16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              style={{ position: 'relative', zIndex: 2 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+              style={{ position: 'relative', zIndex: 2, width: '100%' }}
             >
-              {/* Node dot on the pipe */}
-              <div style={{
-                position: 'absolute',
-                left: '-2.15rem',
-                top: '1.4rem',
-                width: '18px',
-                height: '18px',
-                borderRadius: '50%',
-                background: 'var(--color-bg)',
-                border: `3px solid ${item.active ? 'var(--color-accent)' : 'rgba(59,130,246,0.35)'}`,
-                boxShadow: item.active ? '0 0 12px rgba(59,130,246,0.7)' : 'none',
-                zIndex: 3,
-              }} />
               <RoadmapCardContent item={item} />
             </motion.div>
           ))}
@@ -221,11 +255,14 @@ export default function Roadmap() {
 
 function RoadmapCardContent({ item }) {
   return (
-    <div className="glass-card roadmap-card" style={{
+    <div className="roadmap-card" style={{
       padding: '1.35rem 1.5rem',
       borderRadius: '12px',
-      borderColor: item.active ? 'rgba(59,130,246,0.3)' : undefined,
-      position: 'relative', overflow: 'hidden',
+      background: 'rgba(13,16,28,0.97)',
+      border: `1px solid ${item.active ? 'rgba(59,130,246,0.3)' : 'var(--color-border)'}`,
+      position: 'relative',
+      overflow: 'hidden',
+      zIndex: 2,
     }}>
       {item.active && (
         <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '3px', background: 'linear-gradient(to bottom, var(--color-accent), transparent)' }} />
