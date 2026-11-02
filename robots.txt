@@ -1,5 +1,5 @@
 # robots.txt for Nirvan Respati Hadi Aminsyah Portfolio
-# https://nirvan.my.id/
+# https://www.nirvan.my.id/
 
 User-agent: *
 Allow: /
@@ -25,4 +25,4 @@ User-agent: Google-Extended
 Allow: /
 
 # Search engines Sitemap (Absolute URL required by RFC standard)
-Sitemap: https://nirvan.my.id/sitemap.xml
+Sitemap: https://www.nirvan.my.id/sitemap.xml

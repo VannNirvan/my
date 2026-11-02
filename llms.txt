@@ -46,7 +46,7 @@
 - **Broken Link Hijacking**: Pengujian keamanan tautan eksternal yang tidak lagi terdaftar.
 
 ## 5. Tautan & Kontak Resmi (Official Links)
-- **Website Resmi**: https://nirvan.my.id/
+- **Website Resmi**: https://www.nirvan.my.id/
 - **Instagram**: https://www.instagram.com/aku_nirvan/
 - **GitHub**: https://github.com/VannNirvan (alias: https://github.com/404notvan)
 - **NASA Bugcrowd Profile**: https://bugcrowd.com/nasa (Listed as Nirvan_Respati_Hadi)
