@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://vannnirvan.github.io/my/</loc>
+    <loc>https://nirvan.my.id/</loc>
     <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://vannnirvan.github.io/my/logo.png</image:loc>
+      <image:loc>https://nirvan.my.id/logo.png</image:loc>
       <image:title>Nirvan Respati Hadi Aminsyah (404notvan) Portfolio</image:title>
       <image:caption>Junior Cybersecurity &amp; Bug Hunter Indonesia</image:caption>
     </image:image>
