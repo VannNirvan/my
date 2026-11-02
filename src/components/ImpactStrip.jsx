@@ -1,6 +1,6 @@
 const stats = [
-  { value: '5+', label: 'Findings' },
-  { value: '5', label: 'Certificates' },
+  { value: '40+', label: 'Findings' },
+  { value: '17', label: 'Certificates' },
   { value: '1', label: 'Hall of Fame' },
   { value: '2026', label: 'Started' },
 ]

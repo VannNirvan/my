@@ -1,5 +1,23 @@
 const findings = [
   {
+    id: 'sqli',
+    title: 'SQL Injection (SQLi)',
+    type: 'Authentication Bypass',
+    severity: 'Critical',
+    severityColor: '#ff2d55',
+    summary:
+      'Injeksi SQL pada form autentikasi yang berhasil mem-bypass validasi kredensial, memberikan akses penuh langsung masuk ke dashboard admin.',
+  },
+  {
+    id: 'bac-idor',
+    title: 'Broken Access Control (IDOR)',
+    type: 'Broken Access Control',
+    severity: 'Critical',
+    severityColor: '#ff2d55',
+    summary:
+      'Kegagalan pembatasan hak akses pada parameter ID request, memungkinkan pengaksesan dan manipulasi data sensitif milik pengguna lain tanpa otorisasi.',
+  },
+  {
     id: 'tg-token',
     title: 'Exposed Telegram Bot Token',
     type: 'Secret Exposure',
@@ -18,6 +36,15 @@ const findings = [
       'Input tersimpan dan dieksekusi lagi saat halaman dibuka, tanpa sanitasi cukup. Bisa jalan di sesi korban.',
   },
   {
+    id: 'pii',
+    title: 'PII Leak',
+    type: 'Information Disclosure',
+    severity: 'High',
+    severityColor: '#ef4444',
+    summary:
+      'Data pribadi muncul di response / endpoint yang tidak semestinya publik.',
+  },
+  {
     id: 'blh',
     title: 'Broken Link Hijacking',
     type: 'Asset Takeover',
@@ -27,22 +54,13 @@ const findings = [
       'Link eksternal ke resource mati / tidak diklaim. Slot kosong bisa diambil pihak lain.',
   },
   {
-    id: 'git-exposed',
-    title: 'Git Repository Exposed',
-    type: 'Misconfiguration',
-    severity: 'High',
-    severityColor: '#ef4444',
+    id: 'html-injection',
+    title: 'HTML Injection',
+    type: 'Content Injection',
+    severity: 'Medium',
+    severityColor: '#f59e0b',
     summary:
-      'Metadata Git bisa diakses dari luar. Sering buka source, history, atau credential di commit lama.',
-  },
-  {
-    id: 'pii',
-    title: 'PII Leak',
-    type: 'Information Disclosure',
-    severity: 'High',
-    severityColor: '#ef4444',
-    summary:
-      'Data pribadi muncul di response / endpoint yang tidak semestinya publik.',
+      'Input tidak terfilter disisipkan ke halaman web, memungkinkan manipulasi tampilan visual, injeksi markup, atau penyisipan form phishing.',
   },
 ]
 
@@ -75,7 +93,7 @@ export default function FeaturedFindings() {
             marginRight: 'auto',
             lineHeight: 1.65,
           }}>
-            Beberapa tipe bug yang sempat saya temukan. Nama target dan PoC tidak ditampilkan.
+            Beberapa tipe bug pilihan dari 40+ temuan yang sempat saya laporkan. Nama target dan PoC tidak ditampilkan.
           </p>
         </div>
 
@@ -83,8 +101,8 @@ export default function FeaturedFindings() {
           className="reveal-element findings-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
-            gap: '0.9rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
+            gap: '1rem',
             alignItems: 'stretch',
             marginTop: '1.5rem',
           }}
@@ -97,11 +115,12 @@ export default function FeaturedFindings() {
                 background: 'rgba(15,18,33,0.85)',
                 border: '1px solid var(--color-border)',
                 borderRadius: '12px',
-                padding: '1.15rem 1.05rem 1.2rem',
+                padding: '1.25rem 1.15rem 1.3rem',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.55rem',
+                gap: '0.6rem',
                 height: 'auto',
+                transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
               }}
             >
               <div style={{
@@ -112,20 +131,23 @@ export default function FeaturedFindings() {
               }}>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.62rem',
+                  fontSize: '0.68rem',
                   color: 'var(--color-accent)',
                   letterSpacing: '0.08em',
+                  fontWeight: 700,
                 }}>
                   {String(idx + 1).padStart(2, '0')}
                 </span>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.58rem',
+                  fontSize: '0.62rem',
+                  fontWeight: 600,
                   color: item.severityColor,
-                  border: `1px solid ${item.severityColor}44`,
-                  background: `${item.severityColor}14`,
+                  border: `1px solid ${item.severityColor}55`,
+                  background: `${item.severityColor}18`,
                   borderRadius: '4px',
-                  padding: '0.12rem 0.4rem',
+                  padding: '0.15rem 0.5rem',
+                  letterSpacing: '0.04em',
                 }}>
                   {item.severity}
                 </span>
@@ -134,7 +156,7 @@ export default function FeaturedFindings() {
               <h3 style={{
                 fontFamily: 'var(--font-body)',
                 fontWeight: 600,
-                fontSize: '0.92rem',
+                fontSize: '0.96rem',
                 color: 'var(--color-text-primary)',
                 margin: 0,
                 lineHeight: 1.35,
@@ -144,7 +166,7 @@ export default function FeaturedFindings() {
 
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.58rem',
+                fontSize: '0.62rem',
                 color: 'var(--color-text-muted)',
                 letterSpacing: '0.04em',
               }}>
@@ -153,7 +175,7 @@ export default function FeaturedFindings() {
 
               <p style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.8rem',
+                fontSize: '0.82rem',
                 color: 'var(--color-text-secondary)',
                 lineHeight: 1.55,
                 margin: 0,
@@ -165,14 +187,14 @@ export default function FeaturedFindings() {
         </div>
 
         <p className="reveal-element" style={{
-          marginTop: '1.35rem',
+          marginTop: '1.75rem',
           textAlign: 'center',
           fontFamily: 'var(--font-body)',
           fontSize: '0.8rem',
           color: 'var(--color-text-muted)',
           lineHeight: 1.6,
         }}>
-          Bukti formal ada di section Certificates & Hall of Fame.
+          Bukti formal ada di section Certificates &amp; Hall of Fame.
         </p>
       </div>
     </section>

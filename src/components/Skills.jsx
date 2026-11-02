@@ -1,6 +1,10 @@
 const skillItems = [
-  { name: 'No Rate Limit', desc: 'Tidak adanya pembatasan jumlah percobaan request pada endpoint sensitif seperti login & OTP, yang membuka celah brute-force.' },
+  { name: 'SQL Injection (SQLi)', desc: 'Manipulasi query database via input tidak terfilter untuk bypass autentikasi login, ekstraksi basis data, hingga pengambilalihan kontrol sistem.' },
+  { name: 'Broken Access Control (BAC)', desc: 'Kelemahan pembatasan otorisasi yang memungkinkan user mengakses endpoint, data pribadi, atau fungsi administratif tanpa hak akses sah.' },
+  { name: 'RCE (Remote Code Execution)', desc: 'Celah kritis tingkat tinggi yang memungkinkan penyerang mengeksekusi perintah shell arbitrari secara langsung pada server target.' },
+  { name: 'HTML Injection', desc: 'Penyisipan markup HTML mentah ke dalam halaman web akibat minimnya sanitasi input, berisiko defacement visual dan phishing tersembunyi.' },
   { name: 'IDOR (Insecure Direct Obj Ref)', desc: 'Ekstraksi atau manipulasi data pengguna lain dengan mengganti parameter ID pada request tanpa otorisasi yang valid.' },
+  { name: 'No Rate Limit', desc: 'Tidak adanya pembatasan jumlah percobaan request pada endpoint sensitif seperti login & OTP, yang membuka celah brute-force.' },
   { name: 'Broken Link Hijacking', desc: 'Pengambilalihan akun sosial media atau domain eksternal yang sudah mati namun masih tertaut di halaman aplikasi.' },
   { name: 'Information Disclosure', desc: 'Kebocoran data rahasia seperti API keys, credentials, atau file sensitif yang terekspos di repo publik atau JS bundle.' },
   { name: 'Account Takeover (ATO)', desc: 'Pengambilalihan akun penuh melalui eksekusi celah logika autentikasi, reset password, atau token session poisoning.' },
@@ -14,7 +18,6 @@ const skillItems = [
   { name: 'Business Logic Error', desc: 'Celah pada logika bisnis aplikasi yang memungkinkan pemalsuan harga, kupon berulang, atau bypass alur transaksi.' },
   { name: 'Path Traversal', desc: 'Manipulasi input file path (../../) untuk membaca file sensitif seperti /etc/passwd pada server web.' },
   { name: 'XXE (XML External Entity)', desc: 'Eksploitasi parser XML untuk membaca file lokal server atau melakukan SSRF ke sistem internal.' },
-  { name: 'RCE (Remote Code Execution)', desc: 'Celah paling kritis yang memungkinkan penyerang menjalankan perintah shell arbitrari di server aplikasi.' },
   { name: 'LFI (Local File Inclusion)', desc: 'Inklusi file lokal server yang tidak tervalidasi sehingga file eksekusi atau konfigurasi dapat dibaca.' },
 ]
 

@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: '1.5rem' }}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>
-            © 2026 Nirvan Respati · 404notvan
+            © 2026 Nirvan Respati Hadi Aminsyah · 404notvan
           </p>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'rgba(60,70,90,0.6)' }}>
             Built with curiosity &amp; determination

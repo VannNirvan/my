@@ -1,31 +1,19 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-// Public paths + BASE_URL so logos work on domain / subdirectory deploys
 const base = import.meta.env.BASE_URL || '/'
 const logo = `${base}logo.png`
-const redLogo = `${base}404notvanlogo.png`
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
-  const [isRed, setIsRed] = useState(false)
-
-  useEffect(() => {
-    const html = document.documentElement
-    const syncMode = () => setIsRed(html.getAttribute('data-mode') === 'red')
-    syncMode()
-    const observer = new MutationObserver(syncMode)
-    observer.observe(html, { attributes: true, attributeFilter: ['data-mode'] })
-    return () => observer.disconnect()
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40)
 
-      const sections = ['hero', 'about', 'education', 'tools', 'skills', 'findings', 'hof', 'certs', 'contact']
+      const sections = ['hero', 'about', 'education', 'tools', 'skills', 'findings', 'hof', 'certs']
       const scrollPos = window.scrollY + 200
 
       for (const sectionId of sections) {
@@ -101,27 +89,24 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '0.85rem',
-            padding: scrolled ? '0.45rem 1rem 0.45rem 1.15rem' : '0.55rem 1.15rem 0.55rem 1.25rem',
+            gap: '1rem',
+            padding: scrolled ? '0.45rem 1.15rem' : '0.55rem 1.35rem',
             borderRadius: scrolled ? '999px' : '14px',
             background: scrolled
               ? 'rgba(9, 12, 23, 0.92)'
               : 'rgba(11, 14, 26, 0.72)',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',
-            border: `1px solid ${scrolled
-              ? (isRed ? 'rgba(255,40,70,0.28)' : 'rgba(59,130,246,0.22)')
-              : 'rgba(255,255,255,0.08)'}`,
+            border: `1px solid ${scrolled ? 'rgba(59,130,246,0.22)' : 'rgba(255,255,255,0.08)'}`,
             boxShadow: scrolled
-              ? (isRed
-                ? '0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 40, 70, 0.12)'
-                : '0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1)')
+              ? '0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1)'
               : '0 8px 28px rgba(0, 0, 0, 0.25)',
             transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
             minWidth: 0,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0, flex: '1 1 auto' }}>
+          {/* LEFT: Logo */}
+          <div style={{ display: 'flex', alignItems: 'center', flex: '0 0 auto' }}>
             <a
               href="#hero"
               onClick={closeMobile}
@@ -133,75 +118,48 @@ export default function Navbar() {
               }}
             >
               <motion.img
-                key={isRed ? 'red-logo' : 'blue-logo'}
-                src={isRed ? redLogo : logo}
-                alt={isRed ? '404notvan' : 'Logo'}
+                src={logo}
+                alt="Logo"
                 whileHover={{ scale: 1.04 }}
-                initial={{ opacity: 0.7, scale: 0.96 }}
+                initial={{ opacity: 0.8, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
                 className="nav-logo-img"
-                onError={(e) => {
-                  // fallback if one path fails
-                  const el = e.currentTarget
-                  if (el.dataset.fallback === '1') return
-                  el.dataset.fallback = '1'
-                  el.src = isRed ? `${base}logo.png` : `${base}404notvanlogo.png`
-                }}
                 style={{
                   height: scrolled ? '40px' : '46px',
                   width: 'auto',
                   maxWidth: '170px',
                   objectFit: 'contain',
                   display: 'block',
-                  filter: isRed
-                    ? 'brightness(1.1) drop-shadow(0 0 12px rgba(255, 40, 70, 0.6))'
-                    : 'brightness(1.1) drop-shadow(0 0 12px rgba(59, 130, 246, 0.55))',
-                  transition: 'height 0.3s ease, filter 0.4s ease',
+                  filter: 'brightness(1.1) drop-shadow(0 0 12px rgba(59, 130, 246, 0.55))',
+                  transition: 'height 0.3s ease',
                 }}
               />
             </a>
+          </div>
 
+          {/* CENTER: Navigation Links */}
+          <nav
+            className="nav-desktop"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flex: '1 1 auto',
+            }}
+          >
             <div
-              className="desktop-only nav-status-badge"
+              className="nav-desktop-pills"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.4rem',
-                padding: '0.22rem 0.6rem',
+                gap: '0.15rem',
+                background: 'rgba(255,255,255,0.03)',
+                padding: '0.2rem 0.3rem',
                 borderRadius: '999px',
-                background: 'var(--color-accent-subtle)',
-                border: '1px solid var(--color-border-hover)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.6rem',
-                color: 'var(--color-accent)',
-                letterSpacing: '0.06em',
-                whiteSpace: 'nowrap',
+                border: '1px solid rgba(255,255,255,0.06)',
               }}
             >
-              <span style={{
-                width: '6px', height: '6px', borderRadius: '50%',
-                background: isRed ? '#ff2846' : '#10b981',
-                boxShadow: isRed ? '0 0 8px #ff2846' : '0 0 8px #10b981',
-                display: 'inline-block',
-                flexShrink: 0,
-              }} />
-              <span className="nav-status-text">
-                {isRed ? 'Web Hacked' : 'STATUS: BUG HUNTING'}
-              </span>
-            </div>
-          </div>
-
-          <nav className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
-            <div className="nav-desktop-pills" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.15rem',
-              background: 'rgba(255,255,255,0.03)',
-              padding: '0.2rem 0.3rem',
-              borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.06)',
-            }}>
               {links.map((link) => {
                 const isActive = activeSection === link.id
                 return (
@@ -245,36 +203,59 @@ export default function Navbar() {
                 )
               })}
             </div>
+          </nav>
 
-            <motion.a
-              href="#contact"
-              className="nav-contact-btn"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+          {/* RIGHT: Instagram Link (Desktop) */}
+          <div
+            className="desktop-only"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              flex: '0 0 auto',
+            }}
+          >
+            <a
+              href="https://www.instagram.com/aku_nirvan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Profile"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.45rem',
-                fontSize: '0.84rem',
-                fontFamily: 'var(--font-body)',
-                fontWeight: 600,
-                color: 'white',
-                textDecoration: 'none',
-                padding: '0.5rem 1.25rem',
+                padding: '0.38rem 0.85rem',
                 borderRadius: '999px',
-                background: 'var(--color-accent)',
-                boxShadow: '0 4px 16px var(--color-accent-glow)',
-                marginLeft: '0.35rem',
-                whiteSpace: 'nowrap',
+                background: 'rgba(59,130,246,0.06)',
+                border: '1px solid rgba(59,130,246,0.22)',
+                color: 'var(--color-text-secondary)',
+                textDecoration: 'none',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.74rem',
+                letterSpacing: '0.04em',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-accent)'
+                e.currentTarget.style.color = '#fff'
+                e.currentTarget.style.boxShadow = '0 0 16px rgba(59,130,246,0.25)'
+                e.currentTarget.style.background = 'rgba(59,130,246,0.12)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(59,130,246,0.22)'
+                e.currentTarget.style.color = 'var(--color-text-secondary)'
+                e.currentTarget.style.boxShadow = 'none'
+                e.currentTarget.style.background = 'rgba(59,130,246,0.06)'
               }}
             >
-              Contact
-              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
               </svg>
-            </motion.a>
-          </nav>
+              <span>Instagram</span>
+            </a>
+          </div>
 
+          {/* Mobile Toggle Button */}
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
@@ -288,8 +269,8 @@ export default function Navbar() {
               height: '42px',
               flexShrink: 0,
               borderRadius: '50%',
-              background: isRed ? 'rgba(255,40,70,0.1)' : 'rgba(59,130,246,0.08)',
-              border: isRed ? '1px solid rgba(255,40,70,0.28)' : '1px solid rgba(59,130,246,0.2)',
+              background: 'rgba(59,130,246,0.08)',
+              border: '1px solid rgba(59,130,246,0.2)',
               cursor: 'pointer',
               overflow: 'visible',
               padding: 0,
@@ -333,12 +314,12 @@ export default function Navbar() {
                   position: 'relative',
                   zIndex: 2,
                   marginTop: '0.35rem',
-                  background: isRed ? 'rgba(18, 6, 10, 0.97)' : 'rgba(9, 12, 23, 0.97)',
+                  background: 'rgba(9, 12, 23, 0.97)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
                   borderRadius: '14px',
                   padding: '0.65rem',
-                  border: isRed ? '1px solid rgba(255,40,70,0.22)' : '1px solid rgba(59,130,246,0.22)',
+                  border: '1px solid rgba(59,130,246,0.22)',
                   boxShadow: '0 18px 48px rgba(0,0,0,0.55)',
                   display: 'flex',
                   flexDirection: 'column',
@@ -362,9 +343,7 @@ export default function Navbar() {
                         padding: '0.85rem 1rem',
                         borderRadius: '10px',
                         color: isActive ? 'var(--color-accent)' : 'var(--color-text-primary)',
-                        background: isActive
-                          ? (isRed ? 'rgba(255,40,70,0.1)' : 'rgba(59,130,246,0.1)')
-                          : 'transparent',
+                        background: isActive ? 'rgba(59,130,246,0.1)' : 'transparent',
                         textDecoration: 'none',
                         fontFamily: 'var(--font-body)',
                         fontSize: '0.95rem',
@@ -381,26 +360,32 @@ export default function Navbar() {
                   )
                 })}
                 <a
-                  href="#contact"
+                  href="https://www.instagram.com/aku_nirvan/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={closeMobile}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    gap: '0.5rem',
                     marginTop: '0.35rem',
-                    padding: '0.9rem 1rem',
+                    padding: '0.75rem 1rem',
                     borderRadius: '10px',
-                    background: 'var(--color-accent)',
+                    border: '1px solid rgba(59,130,246,0.22)',
+                    background: 'rgba(59,130,246,0.08)',
                     color: 'white',
                     textDecoration: 'none',
-                    fontFamily: 'var(--font-body)',
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
-                    minHeight: '48px',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.82rem',
+                    minHeight: '44px',
                     WebkitTapHighlightColor: 'transparent',
                   }}
                 >
-                  Contact Me
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                  <span>Instagram Profile</span>
                 </a>
               </motion.nav>
             </>

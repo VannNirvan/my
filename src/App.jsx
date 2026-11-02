@@ -12,7 +12,7 @@ const FeaturedFindings = lazy(() => import('./components/FeaturedFindings'))
 const HallOfFame = lazy(() => import('./components/HallOfFame'))
 const Certificates = lazy(() => import('./components/Certificates'))
 const ImpactStrip = lazy(() => import('./components/ImpactStrip'))
-const ContactMe = lazy(() => import('./components/ContactMe'))
+const QuoteSection = lazy(() => import('./components/QuoteSection'))
 
 function App() {
   useEffect(() => {
@@ -28,19 +28,29 @@ function App() {
       { threshold: 0.01, rootMargin: '0px 0px 15% 0px' }
     )
 
+    let rafId = null
     const observeAll = () => {
       document.querySelectorAll('.reveal-element:not(.revealed)').forEach((el) => {
         observer.observe(el)
       })
     }
 
+    const debouncedObserveAll = () => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        observeAll()
+        rafId = null
+      })
+    }
+
     observeAll()
-    const mo = new MutationObserver(observeAll)
+    const mo = new MutationObserver(debouncedObserveAll)
     mo.observe(document.body, { childList: true, subtree: true })
-    const t1 = setTimeout(observeAll, 100)
+    const t1 = setTimeout(observeAll, 120)
     const t2 = setTimeout(observeAll, 600)
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId)
       clearTimeout(t1)
       clearTimeout(t2)
       mo.disconnect()
@@ -65,7 +75,7 @@ function App() {
           <HallOfFame />
           <Certificates />
           <ImpactStrip />
-          <ContactMe />
+          <QuoteSection />
         </Suspense>
       </main>
 

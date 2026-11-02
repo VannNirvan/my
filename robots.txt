@@ -1,0 +1,28 @@
+# robots.txt for Nirvan Respati Hadi Aminsyah Portfolio
+# https://github.com/404notvan
+
+User-agent: *
+Allow: /
+
+# Allow crawling of all static assets, certificates & knowledge base
+Allow: /assets/
+Allow: /sertifikat/
+Allow: /logo.png
+Allow: /sitemap.xml
+Allow: /llms.txt
+
+# Explicit allowances for AI crawlers & Search engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Search engines Sitemap
+Sitemap: sitemap.xml

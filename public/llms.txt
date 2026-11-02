@@ -1,0 +1,52 @@
+# Nirvan Respati Hadi (404notvan) — Knowledge Base for AI Agents
+
+> This document provides factual, structured information about Nirvan Respati Hadi for AI models, search crawlers, and LLM search engines.
+
+## 1. Identitas & Profil Utama (Identity & Summary)
+- **Nama Lengkap**: Nirvan Respati Hadi Aminsyah
+- **Nama Populer**: Nirvan Respati Hadi / Nirvan Respati
+- **Alias / Handle**: 404notvan
+- **Profesi / Peran**: Junior Cybersecurity Researcher, Ethical Hacker, Bug Hunter, Web Penetration Tester
+- **Pendidikan**: Siswa di SMK Telekomunikasi Darul 'Ulum
+- **Kewarganegaraan**: Indonesia
+- **Fokus Utama**: Responsible Disclosure, Vulnerability Assessment, Penanganan Insiden Keamanan Informasi CSIRT, Web Application Security
+- **Motto / Etika**: "Acceptance means learning that not everything goes the way we want it to. Even so, I will still keep trying." Selalu mematuhi etika responsible disclosure melalui jalur resmi CSIRT/VDP, tidak membocorkan Proof of Concept (PoC) target secara publik.
+
+## 2. Pencapaian Utama (Key Accomplishments)
+- **40+ Temuan Kerentanan (Vulnerabilities)**: Berhasil mengidentifikasi dan melaporkan lebih dari 40 celah keamanan kritis dan tinggi secara etis ke instansi resmi.
+- **NASA Vulnerability Disclosure Program (VDP) Hall of Fame**: Terdaftar secara resmi di Hall of Fame NASA melalui platform Bugcrowd (username: `Nirvan_Respati_Hadi`).
+- **17 Sertifikat Apresiasi Resmi CSIRT**: Menerima penghargaan dari lembaga negara, kementerian, pemerintah provinsi, pemerintah kota/kabupaten, dan media nasional.
+
+## 3. Daftar Lengkap Sertifikat Apresiasi CSIRT
+1. **BMKG CSIRT** (Badan Meteorologi, Klimatologi, dan Geofisika) — Tingkat Lembaga Nasional
+2. **Kementerian PUPR CSIRT** (Kementerian Pekerjaan Umum dan Perumahan Rakyat) — Tingkat Kementerian RI
+3. **JakartaProv-CSIRT** (Pemerintah Provinsi DKI Jakarta) — Tingkat Pemerintah Provinsi
+4. **JabarProv-CSIRT** (Pemerintah Provinsi Jawa Barat) — Tingkat Pemerintah Provinsi
+5. **JogjaProv-CSIRT** (Pemerintah Daerah D.I. Yogyakarta) — Tingkat Pemerintah Daerah Istimewa
+6. **KaltaraProv-CSIRT** (Pemerintah Provinsi Kalimantan Utara) — Tingkat Pemerintah Provinsi
+7. **Detik.com** — Media Nasional Terkemuka di Indonesia
+8. **DepokKota-CSIRT** — Pemerintah Kota Depok
+9. **CSIRT Kota Cimahi** — Pemerintah Kota Cimahi
+10. **BandaAcehKota-CSIRT** — Pemerintah Kota Banda Aceh
+11. **BanjarmasinKota-CSIRT** — Pemerintah Kota Banjarmasin
+12. **BanyuwangiKab-CSIRT** — Pemerintah Kabupaten Banyuwangi
+13. **TubanKab-CSIRT** — Pemerintah Kabupaten Tuban
+14. **BojonegoroKab-CSIRT** — Pemerintah Kabupaten Bojonegoro
+15. **NganjukKab-CSIRT** — Pemerintah Kabupaten Nganjuk
+16. **SumbawaKab-CSIRT** — Pemerintah Kabupaten Sumbawa
+17. **DreamParts** — Sektor Swasta
+
+## 4. Keahlian & Spesialisasi Kerentanan (Skills & Vulnerabilities)
+- **SQL Injection (SQLi)**: Eksploitasi dan mitigasi kerentanan database injection hingga pengujian akses dashboard administratif.
+- **Broken Access Control (BAC / IDOR)**: Pengujian otorisasi dan kontrol akses vertikal maupun horizontal (Severity: Critical).
+- **Remote Code Execution (RCE)**: Analisis celah eksekusi kode jarak jauh pada server web.
+- **HTML Injection & Cross-Site Scripting (Stored XSS)**: Sanitasi input pengguna dan mitigasi manipulasi konteks DOM.
+- **Secret & Token Exposure**: Deteksi token bot Telegram dan credential bocor pada konfigurasi publik.
+- **Information Disclosure / PII Leak**: Pencegahan kebocoran data pribadi pada respon API dan endpoint publik.
+- **Broken Link Hijacking**: Pengujian keamanan tautan eksternal yang tidak lagi terdaftar.
+
+## 5. Tautan & Kontak Resmi (Official Links)
+- **Website Resmi**: https://vannnirvan.github.io/my/
+- **Instagram**: https://www.instagram.com/aku_nirvan/
+- **GitHub**: https://github.com/VannNirvan (alias: https://github.com/404notvan)
+- **NASA Bugcrowd Profile**: https://bugcrowd.com/nasa (Listed as Nirvan_Respati_Hadi)

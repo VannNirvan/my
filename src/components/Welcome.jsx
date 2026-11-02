@@ -45,7 +45,7 @@ export default function Welcome() {
             marginBottom: '1.15rem',
           }}>
             Halo, saya{' '}
-            <strong style={{ color: 'var(--color-accent)', fontWeight: 600 }}>Nirvan Respati Hadi</strong>
+            <strong style={{ color: 'var(--color-accent)', fontWeight: 600 }}>Nirvan Respati Hadi Aminsyah</strong>
             . Di komunitas bug hunting saya lebih dikenal sebagai{' '}
             <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-accent)' }}>404notvan</span>.
           </p>
